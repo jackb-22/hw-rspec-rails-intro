@@ -10,6 +10,7 @@ gem 'uglifier', '>= 2.7.1'
 
 gem 'jquery-rails'
 gem 'bigdecimal', '~> 3.1'
+gem 'json', '~> 2.7'
 gem 'web-console', '~> 4'
 
 # for Heroku deployment - as described in Ap. A of ELLS book
