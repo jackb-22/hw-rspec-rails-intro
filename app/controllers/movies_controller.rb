@@ -44,6 +44,7 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
+
   def search_tmdb
     return unless params.key?(:title)
 
@@ -60,10 +61,13 @@ class MoviesController < ApplicationController
     flash[:success] = "#{movie.title} was successfully added to RottenPotatoes."
     redirect_to search_tmdb_path
   end
+
   private
+
   def movie_params
     params.require(:movie).permit(:title, :rating, :release_date, :description)
   end
+
   def force_index_redirect
     return unless !params.key?(:ratings) || !params.key?(:sort_by)
 
