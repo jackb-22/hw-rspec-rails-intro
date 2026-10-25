@@ -15,6 +15,10 @@ describe Movie do
       expect(movies.map(&:title)).to eq ['Sydney 2000 Olympics Opening Ceremony', 'Sydney 2000 Olympics Closing Ceremony']
       expect(movies).to all(be_a_new(Movie))
     end
+    it 'skips movies already in the database' do
+      Movie.create!(title: 'Sydney 2000 Olympics Opening Ceremony', rating: 'R')
+      expect(Movie.find_in_tmdb({title: 'Olympics'}).map(&:title)).to eq ['Sydney 2000 Olympics Closing Ceremony']
+    end
     it 'rates every movie R' do
       expect(Movie.find_in_tmdb({title: 'Olympics'}).map(&:rating)).to all(eq 'R')
     end

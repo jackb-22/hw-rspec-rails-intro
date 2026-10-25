@@ -14,7 +14,8 @@ class Movie < ActiveRecord::Base
     language = search_terms[:language] unless search_terms[:language] == 'all'
     query = {api_key: api_key, query: search_terms[:title], year: search_terms[:release_year], language: language}
     response = Faraday.get('https://api.themoviedb.org/3/search/movie', query.compact_blank)
-    JSON.parse(response.body)['results'].to_a.map do |movie|
+    JSON.parse(response.body)['results'].to_a.filter_map do |movie|
+      next if exists?(title: movie['title'])
       Movie.new(title: movie['title'], release_date: movie['release_date'], description: movie['overview'], rating: 'R')
     end
   end

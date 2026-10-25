@@ -410,7 +410,7 @@ DEPENDENCIES
   ffi (= 1.14.2)
   guard-rspec
   jquery-rails
-  pg (~> 0.2)
+  pg
   pry
   pry-byebug
   rails (~> 7.1.5)
